@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROG STRYX | Unleash Ultimate Power</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --rog-red: #ff1f3d;
+            --rog-dark: #0a0a0a;
+            --rog-gray: #111111;
+            --crimson-grad: linear-gradient(90deg, #ff003c, #ff4d4d);
+        }
+
+        body {
+            background-color: var(--rog-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .glow-red {
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.3);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 31, 61, 0.8);
+        }
+
+        .glass-card {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: var(--rog-red);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 0, 60, 0.2);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 31, 61, 0.2);
+        }
+
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(255, 31, 61, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 31, 61, 0.05) 1px, transparent 1px);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 31, 61, 0.15) 0%, transparent 70%);
+        }
+
+        .btn-rog {
+            background: var(--crimson-grad);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-rog::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-rog:hover::before {
+            left: 100%;
+        }
+
+        .rgb-border {
+            position: relative;
+            padding: 1px;
+            background: linear-gradient(45deg, #ff1f3d, #111, #ff1f3d);
+            background-size: 400% 400%;
+            animation: borderRotate 5s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .float-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #ff1f3d; border-radius: 10px; }
+
+        /* ===== WHATSAPP FLOATING BUTTON ===== */
+        .wa-float-wrapper {
+            position: fixed;
+            bottom: 32px;
+            left: 28px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        /* Tooltip bubble */
+        .wa-tooltip {
+            background: rgba(17, 17, 17, 0.95);
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.15);
+            position: relative;
+        }
+
+        .wa-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 20px;
+            border-width: 7px 6px 0;
+            border-style: solid;
+            border-color: rgba(37, 211, 102, 0.4) transparent transparent;
+        }
+
+        .wa-tooltip span {
+            color: #25d366;
+        }
+
+        .wa-float-wrapper:hover .wa-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Main button */
+        .wa-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1ebe5d, #128c3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.4);
+            animation: wa-pulse 2.5s infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wa-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .wa-btn:hover::before { left: 100%; }
+
+        .wa-btn:hover {
+            transform: scale(1.12) rotate(-3deg);
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 8px rgba(37, 211, 102, 0.1);
+        }
+
+        .wa-btn svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes wa-pulse {
+            0%   { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.4); }
+            50%  { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 12px rgba(37,211,102,0.0); }
+            100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.0); }
+        }
+
+        /* Badge notif */
+        .wa-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background: #ff1f3d;
+            border-radius: 50%;
+            font-size: 9px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            border: 2px solid #0a0a0a;
+            animation: badge-blink 1.5s infinite;
+        }
+
+        @keyframes badge-blink {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+    <div class="wa-float-wrapper">
+        <div class="wa-tooltip">
+            ORDER VIA <span>WHATSAPP</span> &nbsp;⚡
+        </div>
+        <a
+            href="https://wa.me/6281234567890?text=Halo%20ROG%20STRYX%2C%20saya%20ingin%20order%20ROG%20STRYX%20Elite%20Series%202026!"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wa-btn"
+            aria-label="Order via WhatsApp"
+        >
+            <!-- WhatsApp SVG Icon -->
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.001 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.363.633 4.669 1.836 6.688L2.667 29.333l6.864-1.799A13.27 13.27 0 0 0 16.001 29.333c7.364 0 13.332-5.97 13.332-13.333S23.365 2.667 16.001 2.667zm0 24.267a11.01 11.01 0 0 1-5.617-1.539l-.402-.24-4.076 1.069 1.088-3.975-.263-.41A10.978 10.978 0 0 1 5.001 16c0-6.075 4.925-11 11-11s11 4.925 11 11-4.925 11-11 11zm6.07-8.231c-.333-.167-1.97-.972-2.276-1.083-.305-.11-.527-.167-.748.167-.222.333-.86 1.083-1.055 1.305-.194.222-.388.25-.721.083-.333-.167-1.407-.519-2.68-1.655-.99-.884-1.659-1.976-1.854-2.31-.194-.333-.021-.513.146-.679.15-.149.333-.388.5-.583.167-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.167-.748-1.805-1.028-2.472-.27-.648-.547-.56-.748-.57-.194-.01-.416-.012-.638-.012-.222 0-.583.083-.888.417-.305.333-1.166 1.139-1.166 2.777s1.194 3.222 1.36 3.444c.167.222 2.35 3.588 5.694 5.031.796.344 1.417.55 1.901.703.799.254 1.527.218 2.102.132.641-.096 1.97-.805 2.248-1.583.278-.778.278-1.444.194-1.583-.083-.139-.305-.222-.638-.389z"/>
+            </svg>
+            <div class="wa-badge">1</div>
+        </a>
+    </div>
+    <!-- ===== END WHATSAPP BUTTON ===== -->
+
+    <nav class="fixed top-0 w-full z-50 nav-blur transition-all duration-300 py-4 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-[#ff1f3d] rounded-sm rotate-45 flex items-center justify-center">
+                    <i data-lucide="zap" class="text-white w-5 h-5 -rotate-45"></i>
+                </div>
+                <span class="font-orbitron text-2xl font-black tracking-tighter text-white">ROG <span class="text-[#ff1f3d]">STRYX</span></span>
+            </div>
+
+            <div class="hidden lg:flex justify-center space-x-8 font-orbitron text-xs tracking-widest uppercase">
+                <a href="#home" class="hover:text-[#ff1f3d] transition-colors relative group">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff1f3d] group-hover:w-full transition-all"></span>
+                </a>
+                <a href="#performance" class="hover:text-[#ff1f3d] transition-colors relative group">Performance</a>
+                <a href="#specs" class="hover:text-[#ff1f3d] transition-colors relative group">Specs</a>
+                <a href="#gallery" class="hover:text-[#ff1f3d] transition-colors relative group">Gallery</a>
+            </div>
+
+            <div class="flex justify-end items-center space-x-4">
+                <button class="hidden md:block font-orbitron text-[10px] border border-white/20 px-4 py-2 hover:border-[#ff1f3d] transition-all">SUPPORT</button>
+                <button class="btn-rog px-6 py-2 font-orbitron text-sm font-bold skew-x-[-15deg]">
+                    <span class="inline-block skew-x-[15deg]">BUY NOW</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <div class="flex items-center space-x-3 mb-6">
+                    <span class="h-[2px] w-12 bg-[#ff1f3d]"></span>
+                    <span class="font-orbitron text-[#ff1f3d] tracking-[0.3em] text-sm">ELITE SERIES 2026</span>
+                </div>
+                <h1 class="font-orbitron text-6xl md:text-8xl font-black leading-none mb-6">
+                    UNLEASH <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff1f3d] to-[#ff4d4d]">ULTIMATE</span> <br> POWER
+                </h1>
+                <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
+                    Experience world-class performance with the new ROG Stryx. Powered by the latest RTX 50-Series and liquid metal cooling technology.
+                </p>
+                <div class="flex space-x-6">
+                    <button class="btn-rog px-10 py-4 font-orbitron font-bold text-lg shadow-[0_0_30px_rgba(255,31,61,0.4)]">PRE-ORDER</button>
+                    <button class="group flex items-center space-x-3 font-orbitron hover:text-[#ff1f3d] transition-all">
+                        <span class="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center group-hover:border-[#ff1f3d]">
+                            <i data-lucide="play" class="fill-current"></i>
+                        </span>
+                        <span>WATCH TRAILER</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="relative z-10 float-anim">
+                    <div class="absolute -inset-4 bg-[#ff1f3d]/20 blur-[100px] rounded-full"></div>
+                    <img src="1.png" alt="Gaming Laptop" class="w-full drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]">
+                    
+                    <div class="absolute top-0 -right-4 glass-card p-4 rounded-xl border-l-4 border-l-[#ff1f3d]">
+                        <p class="text-[10px] text-gray-400 font-orbitron">MAX REFRESH</p>
+                        <p class="text-xl font-bold font-orbitron">360Hz</p>
+                    </div>
+                    <div class="absolute bottom-10 -left-10 glass-card p-4 rounded-xl border-l-4 border-l-[#ff1f3d]">
+                        <p class="text-[10px] text-gray-400 font-orbitron">GPU TURBO</p>
+                        <p class="text-xl font-bold font-orbitron">RTX 5090</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="performance" class="pt-24 pb-10 bg-[#0d0d0d]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="font-orbitron text-4xl md:text-5xl font-black mb-4">DOMINATE THE FIELD</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Engineered for those who demand the absolute best in mobile computing performance.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center bg-[#ff1f3d]/10 rounded-lg group-hover:bg-[#ff1f3d] transition-all duration-500">
+                        <i data-lucide="cpu" class="text-[#ff1f3d] group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4">Intel i9 14th Gen</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">24 cores of pure processing power to handle heavy gaming and 8K streaming simultaneously.</p>
+                </div>
+                <div class="glass-card p-8 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center bg-[#ff1f3d]/10 rounded-lg group-hover:bg-[#ff1f3d] transition-all duration-500">
+                        <i data-lucide="monitor" class="text-[#ff1f3d] group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4">RTX 5090 Graphics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Experience Ray Tracing at its peak with 16GB VRAM and AI-powered DLSS 4.0 technology.</p>
+                </div>
+                <div class="glass-card p-8 group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center bg-[#ff1f3d]/10 rounded-lg group-hover:bg-[#ff1f3d] transition-all duration-500">
+                        <i data-lucide="wind" class="text-[#ff1f3d] group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-orbitron text-xl font-bold mb-4">Intelligent Cooling</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Liquid metal thermal compound keeps your system 15°C cooler under extreme workloads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 relative overflow-hidden">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <img src="rogg (1).jpg" alt="Hardware Detail" class="rounded-3xl shadow-2xl border border-white/10">
+            </div>
+            <div data-aos="fade-left">
+                <h2 class="font-orbitron text-4xl font-black mb-8">BUILT FOR <span class="text-[#ff1f3d]">VICTORY</span></h2>
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <i data-lucide="check-circle" class="text-[#ff1f3d] mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Aura Sync RGB</h4>
+                            <p class="text-gray-400">Customize every key and light bar with millions of colors.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <i data-lucide="check-circle" class="text-[#ff1f3d] mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Dolby Atmos Audio</h4>
+                            <p class="text-gray-400">Immersive 3D soundscapes for a competitive edge in-game.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <i data-lucide="check-circle" class="text-[#ff1f3d] mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-lg">Wi-Fi 7 Ready</h4>
+                            <p class="text-gray-400">Ultrafast connectivity for lag-free online domination.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative bg-gradient-to-b from-black to-[#1a0505]">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-orbitron text-3xl font-bold mb-12">PRECISION INPUT</h2>
+            <div class="relative max-w-5xl mx-auto overflow-hidden rounded-2xl border border-[#ff1f3d]/30 group">
+                <div class="absolute inset-0 bg-[#ff1f3d]/5 group-hover:bg-[#ff1f3d]/10 transition-all duration-1000"></div>
+                <img src="keybordddd.png" alt="Keyboard" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#ff1f3d] to-transparent animate-pulse"></div>
+            </div>
+            <p class="mt-8 text-gray-400 font-orbitron tracking-widest uppercase">Per-Key RGB Lighting Control</p>
+        </div>
+    </section>
+
+    <section id="specs" class="py-24 bg-[#0a0a0a]">
+        <div class="container mx-auto px-6">
+            <h2 class="font-orbitron text-4xl font-black text-center mb-16">TECH SPECIFICATIONS</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Processor</p>
+                    <p class="text-lg font-bold">Intel Core i9-14980HX</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Memory</p>
+                    <p class="text-lg font-bold">64GB DDR5 5600MHz</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Storage</p>
+                    <p class="text-lg font-bold">4TB NVMe PCIe Gen5</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Display</p>
+                    <p class="text-lg font-bold">18" QHD+ 240Hz Nebula</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Battery</p>
+                    <p class="text-lg font-bold">90Wh with 330W Fast Charge</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Weight</p>
+                    <p class="text-lg font-bold">2.4 kg / 5.29 lbs</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">Audio</p>
+                    <p class="text-lg font-bold">4-Speaker System</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-[#111] hover:border-[#ff1f3d]/50 transition-all">
+                    <p class="text-[#ff1f3d] text-xs font-orbitron mb-2 uppercase">OS</p>
+                    <p class="text-lg font-bold">Windows 11 Pro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div class="relative overflow-hidden group h-80">
+                <img src="https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0">
+                <div class="absolute inset-0 bg-[#ff1f3d]/20 opacity-0 group-hover:opacity-100 transition-all"></div>
+            </div>
+            <div class="relative overflow-hidden group h-80">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0">
+                <div class="absolute inset-0 bg-[#ff1f3d]/20 opacity-0 group-hover:opacity-100 transition-all"></div>
+            </div>
+            <div class="relative overflow-hidden group h-80">
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0">
+                <div class="absolute inset-0 bg-[#ff1f3d]/20 opacity-0 group-hover:opacity-100 transition-all"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0d0d0d]">
+        <div class="container mx-auto px-6">
+            <h2 class="font-orbitron text-3xl font-bold mb-12 text-center">ELITE REVIEWS</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8">
+                    <div class="flex text-[#ff1f3d] mb-4">
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">"The thermals on this machine are unbelievable. I've never seen an i9 stay this cool under load."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff1f3d] to-[#7a0018] flex items-center justify-center font-orbitron font-black text-sm">TG</div>
+                        <div>
+                            <p class="font-bold">TechGuruX</p>
+                            <p class="text-xs text-[#ff1f3d]">Verified Pro Gamer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8 border-[#ff1f3d]/50">
+                    <div class="flex text-[#ff1f3d] mb-4">
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">"360Hz display is a game changer for competitive CS2. The motion clarity is life-changing."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff4d00] to-[#ff1f3d] flex items-center justify-center font-orbitron font-black text-sm">FM</div>
+                        <div>
+                            <p class="font-bold">FragMaster</p>
+                            <p class="text-xs text-[#ff1f3d]">Esports Athlete</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <div class="flex text-[#ff1f3d] mb-4">
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                        <i data-lucide="star" class="fill-current w-4"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-6">"Expensive? Yes. Worth it? Absolutely. It replaces my entire desktop workstation."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff1f3d] to-[#4a0010] flex items-center justify-center font-orbitron font-black text-sm">SV</div>
+                        <div>
+                            <p class="font-bold">Sarah V.</p>
+                            <p class="text-xs text-[#ff1f3d]">3D Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#ff003c] to-[#990024] p-12 text-center">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                <div class="relative z-10">
+                    <h2 class="font-orbitron text-4xl md:text-6xl font-black mb-6">READY TO DOMINATE?</h2>
+                    <p class="text-xl mb-10 text-white/80">Join the Republic of Gamers today and experience the future.</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                        <button class="bg-white text-black px-12 py-4 font-orbitron font-black text-lg hover:bg-black hover:text-white transition-all">BUY NOW</button>
+                        <a
+                            href="https://wa.me/6281234567890?text=Halo%20ROG%20STRYX%2C%20saya%20ingin%20order%20ROG%20STRYX%20Elite%20Series%202026!"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center justify-center gap-3 border-2 border-white px-12 py-4 font-orbitron font-black text-lg hover:bg-white hover:text-black transition-all"
+                        >
+                            <!-- WhatsApp mini icon -->
+                            <svg viewBox="0 0 32 32" class="w-6 h-6 fill-current flex-shrink-0"><path d="M16.001 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.363.633 4.669 1.836 6.688L2.667 29.333l6.864-1.799A13.27 13.27 0 0 0 16.001 29.333c7.364 0 13.332-5.97 13.332-13.333S23.365 2.667 16.001 2.667zm0 24.267a11.01 11.01 0 0 1-5.617-1.539l-.402-.24-4.076 1.069 1.088-3.975-.263-.41A10.978 10.978 0 0 1 5.001 16c0-6.075 4.925-11 11-11s11 4.925 11 11-4.925 11-11 11zm6.07-8.231c-.333-.167-1.97-.972-2.276-1.083-.305-.11-.527-.167-.748.167-.222.333-.86 1.083-1.055 1.305-.194.222-.388.25-.721.083-.333-.167-1.407-.519-2.68-1.655-.99-.884-1.659-1.976-1.854-2.31-.194-.333-.021-.513.146-.679.15-.149.333-.388.5-.583.167-.194.222-.333.333-.555.11-.222.055-.417-.028-.583-.083-.167-.748-1.805-1.028-2.472-.27-.648-.547-.56-.748-.57-.194-.01-.416-.012-.638-.012-.222 0-.583.083-.888.417-.305.333-1.166 1.139-1.166 2.777s1.194 3.222 1.36 3.444c.167.222 2.35 3.588 5.694 5.031.796.344 1.417.55 1.901.703.799.254 1.527.218 2.102.132.641-.096 1.97-.805 2.248-1.583.278-.778.278-1.444.194-1.583-.083-.139-.305-.222-.638-.389z"/></svg>
+                            ORDER WHATSAPP
+                        </a>
+                        <button class="border-2 border-white/50 px-12 py-4 font-orbitron font-black text-lg hover:bg-white hover:text-black transition-all">FULL SPECS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 border-t border-white/10">
+        <div class="container mx-auto px-6 flex flex-wrap justify-center gap-8">
+            <a href="#" class="flex items-center space-x-2 text-gray-400 hover:text-[#ff1f3d] transition-all">
+                <i data-lucide="instagram"></i> <span class="font-orbitron text-xs">INSTAGRAM</span>
+            </a>
+            <a href="#" class="flex items-center space-x-2 text-gray-400 hover:text-[#5865F2] transition-all">
+                <i data-lucide="message-square"></i> <span class="font-orbitron text-xs">DISCORD</span>
+            </a>
+            <a
+                href="https://wa.me/6281234567890?text=Halo%20ROG%20STRYX%2C%20saya%20ingin%20order%20ROG%20STRYX%20Elite%20Series%202026!"
+                target="_blank"
+                class="flex items-center space-x-2 text-gray-400 hover:text-[#25d366] transition-all"
+            >
+                <i data-lucide="phone"></i> <span class="font-orbitron text-xs">WHATSAPP</span>
+            </a>
+            <a href="#" class="flex items-center space-x-2 text-gray-400 hover:text-[#ff1f3d] transition-all">
+                <i data-lucide="mail"></i> <span class="font-orbitron text-xs">SUPPORT</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <h4 class="font-orbitron text-[#ff1f3d] mb-6">PRODUCTS</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-white">Laptops</a></li>
+                        <li><a href="#" class="hover:text-white">Desktops</a></li>
+                        <li><a href="#" class="hover:text-white">Monitors</a></li>
+                        <li><a href="#" class="hover:text-white">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-orbitron text-[#ff1f3d] mb-6">SUPPORT</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-white">Product Registration</a></li>
+                        <li><a href="#" class="hover:text-white">Drivers & Manuals</a></li>
+                        <li><a href="#" class="hover:text-white">Warranty</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-orbitron text-[#ff1f3d] mb-6">COMMUNITY</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-white">ROG Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Forums</a></li>
+                        <li><a href="#" class="hover:text-white">Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-orbitron text-white mb-6">JOIN THE ELITE</h4>
+                    <div class="flex border border-white/10 p-1">
+                        <input type="text" placeholder="Email" class="bg-transparent px-4 py-2 w-full focus:outline-none text-sm">
+                        <button class="bg-[#ff1f3d] px-4 py-2"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-10 border-t border-white/5">
+                <p class="text-gray-600 text-xs font-orbitron">© 2026 ROG STRYX LANDING PAGE. REPUBLIC OF GAMERS INSPIRED DESIGN.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: true
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow-[0_10px_30px_rgba(255,31,61,0.2)]');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('py-2', 'shadow-[0_10px_30px_rgba(255,31,61,0.2)]');
+                nav.classList.add('py-4');
+            }
+        });
+
+        gsap.utils.toArray(".glass-card").forEach((card, i) => {
+            gsap.fromTo(card,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                        once: true
+                    }
+                }
+            );
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            
+            gsap.to(".float-anim", {
+                x: moveX * 2,
+                y: moveY * 2,
+                duration: 1
+            });
+        });
+    </script>
+</body>
+</html>
