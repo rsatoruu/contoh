@@ -26,12 +26,14 @@
             overflow-x: hidden;
         }
 
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
 
         .glow-red {
             box-shadow: 0 0 20px rgba(255, 31, 61, 0.3);
         }
-        
+
         .text-glow {
             text-shadow: 0 0 10px rgba(255, 31, 61, 0.8);
         }
@@ -49,41 +51,98 @@
             box-shadow: 0 10px 30px rgba(255, 0, 60, 0.2);
         }
 
+        /* ===== NAVBAR ===== */
+
+        .glass {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.85);
+        }
+
         .nav-blur {
             backdrop-filter: blur(20px);
             background: rgba(10, 10, 10, 0.8);
             border-bottom: 1px solid rgba(255, 31, 61, 0.2);
         }
 
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition:
+                max-height 0.45s ease,
+                opacity 0.3s ease,
+                padding 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 12px;
+        }
+
+        .mobile-menu a {
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #ff1f3d;
+            transform: translateX(4px);
+        }
+
+        /* ===== GRID ===== */
+
         .bg-grid {
             background-size: 50px 50px;
-            background-image: linear-gradient(to right, rgba(255, 31, 61, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 31, 61, 0.05) 1px, transparent 1px);
+            background-image:
+                linear-gradient(to right, rgba(255, 31, 61, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 31, 61, 0.05) 1px, transparent 1px);
         }
 
         .hero-gradient {
             background: radial-gradient(circle at 50% 50%, rgba(255, 31, 61, 0.15) 0%, transparent 70%);
         }
 
-        .btn-rog {
+        /* ===== BUTTON ===== */
+
+        .btn-rog,
+        .btn-red {
             background: var(--crimson-grad);
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.25);
         }
 
-        .btn-rog::before {
+        .btn-rog::before,
+        .btn-red::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.4),
+                transparent
+            );
             transition: 0.5s;
         }
 
-        .btn-rog:hover::before {
+        .btn-rog:hover::before,
+        .btn-red:hover::before {
             left: 100%;
         }
+
+        .btn-red:hover,
+        .btn-rog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 31, 61, 0.35);
+        }
+
+        /* ===== RGB BORDER ===== */
 
         .rgb-border {
             position: relative;
@@ -94,25 +153,52 @@
         }
 
         @keyframes borderRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
+
+        /* ===== FLOATING ===== */
 
         .float-anim {
             animation: floating 3s ease-in-out infinite;
         }
 
         @keyframes floating {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #ff1f3d; border-radius: 10px; }
+        /* ===== SCROLLBAR ===== */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff1f3d;
+            border-radius: 10px;
+        }
 
         /* ===== WHATSAPP FLOATING BUTTON ===== */
+
         .wa-float-wrapper {
             position: fixed;
             bottom: 32px;
@@ -124,7 +210,6 @@
             gap: 10px;
         }
 
-        /* Tooltip bubble */
         .wa-tooltip {
             background: rgba(17, 17, 17, 0.95);
             border: 1px solid rgba(37, 211, 102, 0.4);
@@ -163,7 +248,6 @@
             transform: translateY(0);
         }
 
-        /* Main button */
         .wa-btn {
             width: 60px;
             height: 60px;
@@ -172,9 +256,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.4);
+            box-shadow:
+                0 4px 20px rgba(37, 211, 102, 0.35),
+                0 0 0 0 rgba(37, 211, 102, 0.4);
             animation: wa-pulse 2.5s infinite;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            transition:
+                transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease;
             text-decoration: none;
             position: relative;
             overflow: hidden;
@@ -183,17 +271,28 @@
         .wa-btn::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.2),
+                transparent
+            );
             transition: 0.5s;
         }
 
-        .wa-btn:hover::before { left: 100%; }
+        .wa-btn:hover::before {
+            left: 100%;
+        }
 
         .wa-btn:hover {
             transform: scale(1.12) rotate(-3deg);
-            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 8px rgba(37, 211, 102, 0.1);
+            box-shadow:
+                0 8px 32px rgba(37, 211, 102, 0.5),
+                0 0 0 8px rgba(37, 211, 102, 0.1);
         }
 
         .wa-btn svg {
@@ -205,12 +304,27 @@
         }
 
         @keyframes wa-pulse {
-            0%   { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.4); }
-            50%  { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 12px rgba(37,211,102,0.0); }
-            100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.0); }
+            0% {
+                box-shadow:
+                    0 4px 20px rgba(37,211,102,0.35),
+                    0 0 0 0 rgba(37,211,102,0.4);
+            }
+
+            50% {
+                box-shadow:
+                    0 4px 20px rgba(37,211,102,0.35),
+                    0 0 0 12px rgba(37,211,102,0);
+            }
+
+            100% {
+                box-shadow:
+                    0 4px 20px rgba(37,211,102,0.35),
+                    0 0 0 0 rgba(37,211,102,0);
+            }
         }
 
-        /* Badge notif */
+        /* ===== BADGE ===== */
+
         .wa-badge {
             position: absolute;
             top: -5px;
@@ -231,10 +345,64 @@
         }
 
         @keyframes badge-blink {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
         }
-    </style>
+
+        /* ===== MOBILE FIX ===== */
+
+        @media (max-width: 768px) {
+
+            nav .container,
+            nav .max-w-7xl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            #home {
+                padding-top: 120px;
+            }
+
+            #home h1 {
+                font-size: 3rem !important;
+                line-height: 1.05;
+            }
+
+            #home p {
+                font-size: 14px;
+            }
+
+            #home .flex.space-x-6 {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .wa-float-wrapper {
+                bottom: 20px;
+                left: 18px;
+            }
+
+            .wa-btn {
+                width: 54px;
+                height: 54px;
+            }
+
+            .wa-btn svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .glass-card:hover {
+                transform: none;
+            }
+        }
+</style>
 </head>
 <body class="bg-grid">
 
@@ -259,33 +427,59 @@
     </div>
     <!-- ===== END WHATSAPP BUTTON ===== -->
 
-    <nav class="fixed top-0 w-full z-50 nav-blur transition-all duration-300 py-4 px-6 lg:px-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-[#ff1f3d] rounded-sm rotate-45 flex items-center justify-center">
-                    <i data-lucide="zap" class="text-white w-5 h-5 -rotate-45"></i>
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-5 py-4">
+
+        <div class="flex items-center justify-between">
+
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-[#ff1f3d] rotate-45 flex items-center justify-center rounded-sm">
+                    <i data-lucide="zap" class="-rotate-45 w-5 h-5"></i>
                 </div>
-                <span class="font-orbitron text-2xl font-black tracking-tighter text-white">ROG <span class="text-[#ff1f3d]">STRYX</span></span>
+
+                <h1 class="font-orbitron text-xl md:text-2xl font-black">
+                    ROG <span class="text-[#ff1f3d]">STRYX</span>
+                </h1>
             </div>
 
-            <div class="hidden lg:flex justify-center space-x-8 font-orbitron text-xs tracking-widest uppercase">
-                <a href="#home" class="hover:text-[#ff1f3d] transition-colors relative group">
-                    Home
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff1f3d] group-hover:w-full transition-all"></span>
-                </a>
-                <a href="#performance" class="hover:text-[#ff1f3d] transition-colors relative group">Performance</a>
-                <a href="#specs" class="hover:text-[#ff1f3d] transition-colors relative group">Specs</a>
-                <a href="#gallery" class="hover:text-[#ff1f3d] transition-colors relative group">Gallery</a>
+            <!-- DESKTOP MENU -->
+            <div class="hidden md:flex items-center gap-8 font-orbitron text-xs uppercase tracking-widest">
+                <a href="#home">Home</a>
+                <a href="#performance">Performance</a>
+                <a href="#specs">Specs</a>
+                <a href="#gallery">Gallery</a>
             </div>
 
-            <div class="flex justify-end items-center space-x-4">
-                <button class="hidden md:block font-orbitron text-[10px] border border-white/20 px-4 py-2 hover:border-[#ff1f3d] transition-all">SUPPORT</button>
-                <button class="btn-rog px-6 py-2 font-orbitron text-sm font-bold skew-x-[-15deg]">
-                    <span class="inline-block skew-x-[15deg]">BUY NOW</span>
+            <div class="hidden md:block">
+                <button class="btn-red px-6 py-3 rounded-xl font-bold font-orbitron">
+                    BUY NOW
+                </button>
+            </div>
+
+            <!-- MOBILE BUTTON -->
+            <button id="menuBtn" class="md:hidden">
+                <i data-lucide="menu"></i>
+            </button>
+
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+            <div class="pt-6 flex flex-col gap-5 font-orbitron text-sm">
+                <a href="#home">Home</a>
+                <a href="#performance">Performance</a>
+                <a href="#specs">Specs</a>
+                <a href="#gallery">Gallery</a>
+
+                <button class="btn-red py-3 rounded-xl mt-2">
+                    BUY NOW
                 </button>
             </div>
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
         <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
@@ -617,6 +811,8 @@
     <script>
         lucide.createIcons();
 
+        /* ===== AOS ===== */
+
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
@@ -624,28 +820,55 @@
             mirror: true
         });
 
+        /* ===== GSAP ===== */
+
         gsap.registerPlugin(ScrollTrigger);
 
+        /* ===== NAVBAR SCROLL EFFECT ===== */
+
         window.addEventListener('scroll', () => {
+
             const nav = document.querySelector('nav');
+
             if (window.scrollY > 50) {
-                nav.classList.add('py-2', 'shadow-[0_10px_30px_rgba(255,31,61,0.2)]');
+
+                nav.classList.add(
+                    'py-2',
+                    'shadow-[0_10px_30px_rgba(255,31,61,0.2)]'
+                );
+
                 nav.classList.remove('py-4');
+
             } else {
-                nav.classList.remove('py-2', 'shadow-[0_10px_30px_rgba(255,31,61,0.2)]');
+
+                nav.classList.remove(
+                    'py-2',
+                    'shadow-[0_10px_30px_rgba(255,31,61,0.2)]'
+                );
+
                 nav.classList.add('py-4');
             }
         });
 
+        /* ===== GLASS CARD ANIMATION ===== */
+
         gsap.utils.toArray(".glass-card").forEach((card, i) => {
-            gsap.fromTo(card,
-                { y: 50, opacity: 0 },
+
+            gsap.fromTo(
+                card,
+
+                {
+                    y: 50,
+                    opacity: 0
+                },
+
                 {
                     y: 0,
                     opacity: 1,
                     duration: 0.8,
                     delay: i * 0.1,
                     ease: "power2.out",
+
                     scrollTrigger: {
                         trigger: card,
                         start: "top 90%",
@@ -654,18 +877,83 @@
                     }
                 }
             );
+
         });
 
+        /* ===== FLOAT IMAGE PARALLAX ===== */
+
         document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            
+
+            const moveX =
+                (e.clientX - window.innerWidth / 2) * 0.01;
+
+            const moveY =
+                (e.clientY - window.innerHeight / 2) * 0.01;
+
             gsap.to(".float-anim", {
                 x: moveX * 2,
                 y: moveY * 2,
                 duration: 1
             });
+
         });
-    </script>
+
+        /* ===== MOBILE MENU TOGGLE ===== */
+
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+
+            menuOpen = !menuOpen;
+
+            mobileMenu.classList.toggle('active');
+
+            menuBtn.innerHTML = menuOpen
+                ? '<i data-lucide="x"></i>'
+                : '<i data-lucide="menu"></i>';
+
+            lucide.createIcons();
+        });
+
+        /* ===== AUTO CLOSE MOBILE MENU ===== */
+
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                mobileMenu.classList.remove('active');
+
+                menuOpen = false;
+
+                menuBtn.innerHTML =
+                    '<i data-lucide="menu"></i>';
+
+                lucide.createIcons();
+
+            });
+
+        });
+
+        /* ===== PREVENT MENU BUG WHEN RESIZE ===== */
+
+        window.addEventListener('resize', () => {
+
+            if (window.innerWidth >= 768) {
+
+                mobileMenu.classList.remove('active');
+
+                menuOpen = false;
+
+                menuBtn.innerHTML =
+                    '<i data-lucide="menu"></i>';
+
+                lucide.createIcons();
+            }
+
+        });
+</script>
 </body>
 </html>
