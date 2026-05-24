@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Rasa Nusantara | UMKM Kuliner</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-bg{
+    background:
+    linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,.4)),
+    url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-hover{
+    transition: .4s;
+}
+
+.card-hover:hover{
+    transform: translateY(-10px);
+}
+
+.glass{
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,.1);
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #f97316;
+    border-radius: 999px;
+}
+</style>
+
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <h1 class="text-2xl font-extrabold text-orange-500">
+            Rasa Nusantara
+        </h1>
+
+        <ul class="hidden md:flex items-center gap-8 font-medium">
+            <li><a href="#home" class="hover:text-orange-500 duration-300">Home</a></li>
+            <li><a href="#menu" class="hover:text-orange-500 duration-300">Menu</a></li>
+            <li><a href="#about" class="hover:text-orange-500 duration-300">Tentang</a></li>
+            <li><a href="#gallery" class="hover:text-orange-500 duration-300">Gallery</a></li>
+            <li><a href="#contact" class="hover:text-orange-500 duration-300">Kontak</a></li>
+        </ul>
+
+        <a href="#contact" class="hidden md:block bg-orange-500 hover:bg-orange-600 duration-300 text-white px-5 py-3 rounded-full font-semibold shadow-lg">
+            Pesan Sekarang
+        </a>
+
+        <!-- Mobile Button -->
+        <button id="menu-btn" class="md:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-6">
+        <div class="flex flex-col gap-4 font-medium">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">Tentang</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Kontak</a>
+
+            <a href="#contact" class="bg-orange-500 text-white text-center py-3 rounded-xl">
+                Pesan Sekarang
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero-bg min-h-screen flex items-center text-white">
+
+    <div class="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center">
+
+        <div>
+
+            <div class="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-400/30 px-4 py-2 rounded-full mb-6 glass">
+                <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+                UMKM Kuliner Terbaik
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                Nikmati
+                <span class="text-orange-400">
+                    Kuliner Nusantara
+                </span>
+                Dengan Rasa Premium
+            </h1>
+
+            <p class="text-gray-200 text-lg mt-6 leading-relaxed max-w-xl">
+                Menyediakan makanan khas Indonesia dengan kualitas terbaik,
+                bahan fresh, dan cita rasa autentik yang bikin ketagihan.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 mt-10">
+
+                <a href="#menu"
+                    class="bg-orange-500 hover:bg-orange-600 duration-300 px-8 py-4 rounded-full text-center font-semibold shadow-2xl">
+                    Lihat Menu
+                </a>
+
+                <a href="#about"
+                    class="border border-white/30 hover:bg-white hover:text-black duration-300 px-8 py-4 rounded-full text-center font-semibold">
+                    Tentang Kami
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Hero Card -->
+        <div class="relative">
+
+            <div class="glass border border-white/20 rounded-3xl p-6 shadow-2xl">
+
+                <img
+                    src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop"
+                    class="rounded-2xl h-[400px] w-full object-cover"
+                >
+
+                <div class="mt-6 flex items-center justify-between">
+
+                    <div>
+                        <h3 class="text-2xl font-bold">
+                            Nasi Goreng Special
+                        </h3>
+
+                        <p class="text-gray-300 mt-2">
+                            Best Seller Menu
+                        </p>
+                    </div>
+
+                    <div class="bg-orange-500 px-5 py-3 rounded-2xl font-bold text-lg">
+                        Rp28K
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STATS -->
+<section class="py-20 bg-orange-50">
+
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+            <h2 class="text-5xl font-black text-orange-500">10K+</h2>
+            <p class="mt-3 text-gray-600">Pelanggan</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+            <h2 class="text-5xl font-black text-orange-500">50+</h2>
+            <p class="mt-3 text-gray-600">Menu Pilihan</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+            <h2 class="text-5xl font-black text-orange-500">4.9</h2>
+            <p class="mt-3 text-gray-600">Rating Customer</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+            <h2 class="text-5xl font-black text-orange-500">24/7</h2>
+            <p class="mt-3 text-gray-600">Pelayanan</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-24">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center mb-16">
+            <span class="text-orange-500 font-semibold">
+                MENU FAVORIT
+            </span>
+
+            <h2 class="text-5xl font-black mt-4">
+                Pilihan Menu Terbaik
+            </h2>
+
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+                Berbagai pilihan makanan dan minuman dengan kualitas premium
+                dan rasa autentik Indonesia.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- CARD -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover">
+
+                <img
+                    src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop"
+                    class="h-64 w-full object-cover"
+                >
+
+                <div class="p-6">
+
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-bold">
+                            Nasi Goreng
+                        </h3>
+
+                        <span class="bg-orange-100 text-orange-500 px-3 py-1 rounded-full text-sm font-semibold">
+                            Best Seller
+                        </span>
+                    </div>
+
+                    <p class="text-gray-500 mt-4 leading-relaxed">
+                        Nasi goreng premium dengan topping lengkap dan bumbu khas nusantara.
+                    </p>
+
+                    <div class="flex items-center justify-between mt-6">
+
+                        <h4 class="text-3xl font-black text-orange-500">
+                            Rp28K
+                        </h4>
+
+                        <button class="bg-orange-500 hover:bg-orange-600 duration-300 text-white px-5 py-3 rounded-xl font-semibold">
+                            Order
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover">
+
+                <img
+                    src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=1200&auto=format&fit=crop"
+                    class="h-64 w-full object-cover"
+                >
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        Mie Ayam
+                    </h3>
+
+                    <p class="text-gray-500 mt-4 leading-relaxed">
+                        Mie ayam homemade dengan topping ayam manis gurih dan pangsit crispy.
+                    </p>
+
+                    <div class="flex items-center justify-between mt-6">
+
+                        <h4 class="text-3xl font-black text-orange-500">
+                            Rp22K
+                        </h4>
+
+                        <button class="bg-orange-500 hover:bg-orange-600 duration-300 text-white px-5 py-3 rounded-xl font-semibold">
+                            Order
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-xl card-hover">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=1200&auto=format&fit=crop"
+                    class="h-64 w-full object-cover"
+                >
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        Ayam Bakar
+                    </h3>
+
+                    <p class="text-gray-500 mt-4 leading-relaxed">
+                        Ayam bakar dengan bumbu rempah khas Indonesia dan sambal pedas nikmat.
+                    </p>
+
+                    <div class="flex items-center justify-between mt-6">
+
+                        <h4 class="text-3xl font-black text-orange-500">
+                            Rp35K
+                        </h4>
+
+                        <button class="bg-orange-500 hover:bg-orange-600 duration-300 text-white px-5 py-3 rounded-xl font-semibold">
+                            Order
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+
+        <div>
+
+            <img
+                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200&auto=format&fit=crop"
+                class="rounded-3xl shadow-2xl"
+            >
+
+        </div>
+
+        <div>
+
+            <span class="text-orange-500 font-semibold">
+                TENTANG KAMI
+            </span>
+
+            <h2 class="text-5xl font-black mt-4 leading-tight">
+                UMKM Kuliner Dengan
+                Kualitas Premium
+            </h2>
+
+            <p class="text-gray-600 mt-6 leading-relaxed text-lg">
+                Rasa Nusantara adalah UMKM kuliner yang menghadirkan makanan
+                khas Indonesia dengan kualitas terbaik. Kami menggunakan bahan
+                fresh dan resep autentik untuk menciptakan pengalaman makan
+                yang luar biasa.
+            </p>
+
+            <div class="grid grid-cols-2 gap-6 mt-10">
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-3xl font-black text-orange-500">
+                        100%
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Fresh Ingredients
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-3xl font-black text-orange-500">
+                        Halal
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Terjamin Aman
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-24">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-black">
+                Gallery Makanan
+            </h2>
+
+            <p class="text-gray-500 mt-4">
+                Beberapa menu favorit pelanggan kami.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover">
+
+            <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80&w=1200&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover">
+
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=1200&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover">
+
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TESTIMONI -->
+<section class="py-24 bg-orange-500 text-white">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center mb-16">
+
+            <h2 class="text-5xl font-black">
+                Apa Kata Mereka?
+            </h2>
+
+            <p class="mt-4 text-orange-100">
+                Review pelanggan yang sudah mencoba makanan kami.
+            </p>
+
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-white/10 rounded-3xl p-8 backdrop-blur-lg">
+                <p class="leading-relaxed">
+                    “Makanannya enak banget, porsinya banyak dan harga terjangkau!”
+                </p>
+
+                <div class="mt-6">
+                    <h4 class="font-bold text-xl">
+                        Andi Saputra
+                    </h4>
+
+                    <p class="text-orange-100">
+                        Customer
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white/10 rounded-3xl p-8 backdrop-blur-lg">
+                <p class="leading-relaxed">
+                    “Pelayanannya cepat dan rasa makanannya autentik banget.”
+                </p>
+
+                <div class="mt-6">
+                    <h4 class="font-bold text-xl">
+                        Sarah Putri
+                    </h4>
+
+                    <p class="text-orange-100">
+                        Customer
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white/10 rounded-3xl p-8 backdrop-blur-lg">
+                <p class="leading-relaxed">
+                    “Fix bakal order lagi, recommended buat pecinta kuliner!”
+                </p>
+
+                <div class="mt-6">
+                    <h4 class="font-bold text-xl">
+                        Rizky Maulana
+                    </h4>
+
+                    <p class="text-orange-100">
+                        Customer
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="bg-orange-500 rounded-[40px] p-10 md:p-16 text-white">
+
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+                <div>
+
+                    <h2 class="text-5xl font-black leading-tight">
+                        Siap Order Makanan Favoritmu?
+                    </h2>
+
+                    <p class="mt-5 text-orange-100 text-lg">
+                        Hubungi kami sekarang dan nikmati makanan khas nusantara terbaik.
+                    </p>
+
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 text-gray-800">
+
+                    <form class="space-y-5">
+
+                        <input
+                            type="text"
+                            placeholder="Nama Lengkap"
+                            class="w-full border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
+                        >
+
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            class="w-full border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
+                        >
+
+                        <textarea
+                            rows="5"
+                            placeholder="Pesan..."
+                            class="w-full border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
+                        ></textarea>
+
+                        <button
+                            class="w-full bg-orange-500 hover:bg-orange-600 duration-300 text-white py-4 rounded-2xl font-semibold"
+                        >
+                            Kirim Pesan
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-white py-10">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <div>
+                <h2 class="text-3xl font-black text-orange-500">
+                    Rasa Nusantara
+                </h2>
+
+                <p class="text-gray-400 mt-4 leading-relaxed">
+                    UMKM kuliner terbaik dengan cita rasa autentik Indonesia.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold">
+                    Menu
+                </h3>
+
+                <ul class="mt-4 space-y-3 text-gray-400">
+                    <li>Nasi Goreng</li>
+                    <li>Mie Ayam</li>
+                    <li>Ayam Bakar</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold">
+                    Kontak
+                </h3>
+
+                <ul class="mt-4 space-y-3 text-gray-400">
+                    <li>+62 812 3456 7890</li>
+                    <li>rasanusantara@gmail.com</li>
+                    <li>Bekasi, Indonesia</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500">
+            © 2026 Rasa Nusantara. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+</script>
+
+</body>
+</html>
